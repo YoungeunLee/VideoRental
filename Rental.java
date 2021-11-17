@@ -15,8 +15,6 @@ public class Rental {
 	
 	private Video video ;
 	private int status ; // 0 for Rented, 1 for Returned
-	public static final int STATUS_RENTED = 0 ;
-	public static final int STATUS_RETURNED = 1 ;
 
 	private Date rentDate ;
 	private Date returnDate ;
