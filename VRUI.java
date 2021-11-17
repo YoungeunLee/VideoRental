@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class VRUI {
 	private static Scanner scanner = new Scanner(System.in) ;
 
-	private List<Customer> customers = new ArrayList<Customer>() ;
+	private List<Customer> customers = new ArrayList<Customer>();
 
 	private List<Video> videos = new ArrayList<Video>() ;
 
@@ -39,15 +39,18 @@ public class VRUI {
 		if ( foundCustomer == null ) {
 			System.out.println("No customer found") ;
 		} else {
-			System.out.println("Name: " + foundCustomer.getName() +
-					"\tRentals: " + foundCustomer.getRentals().size()) ;
-			for ( Rental rental: foundCustomer.getRentals() ) {
-				System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ") ;
-				System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode()) ;
-			}
-
+			clearRentalReport(foundCustomer);
 			List<Rental> rentals = new ArrayList<Rental>() ;
 			foundCustomer.setRentals(rentals);
+		}
+	}
+
+	private void clearRentalReport(Customer foundCustomer) {
+		System.out.println("Name: " + foundCustomer.getName() +
+				"\tRentals: " + foundCustomer.getRentals().size()) ;
+		for ( Rental rental: foundCustomer.getRentals() ) {
+			System.out.print("\tTitle: " + rental.getVideo().getTitle() + " ") ;
+			System.out.print("\tPrice Code: " + rental.getVideo().getPriceCode()) ;
 		}
 	}
 
