@@ -1,8 +1,21 @@
 import java.util.Date;
 
 public class Rental {
+	public enum STATUS {
+		RENTED(0), RETURNED(1);
+
+		private final int status;
+		STATUS(int status){
+			this.status=status;
+		}
+		public int getStatus() {
+			return status;
+		}
+	}
+	
 	private Video video ;
 	private int status ; // 0 for Rented, 1 for Returned
+
 	private Date rentDate ;
 	private Date returnDate ;
 
@@ -46,7 +59,7 @@ public class Rental {
 
 	public int getDaysRentedLimit() {
 		int limit = 0 ;
-		int daysRented = getDaysRented();
+		int daysRented = Utils.getDaysRented(this);
 
 		if ( daysRented <= 2) return limit ;
 

@@ -45,7 +45,7 @@ public class Customer {
 		for (Rental each : rentals) {
 			double eachCharge = 0;
 			int eachPoint = 0 ;
-			int daysRented = each.getDaysRented();
+			int daysRented = Utils.getDaysRented(each);
 
 			switch (each.getVideo().getPriceCode()) {
 			case Video.REGULAR:
