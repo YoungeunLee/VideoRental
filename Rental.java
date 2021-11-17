@@ -14,7 +14,7 @@ public class Rental {
 	}
 	
 	private Video video ;
-	private int status ; // 0 for Rented, 1 for Returned
+	private int status ;
 
 	private Date rentDate ;
 	private Date returnDate ;
@@ -50,6 +50,16 @@ public class Rental {
 	public int getDaysRented() {
 		long diff;
 		if (getStatus() == 1) { // returned Video
+			diff = returnDate.getTime() - rentDate.getTime();
+		} else { // not yet returned
+			diff = new Date().getTime() - rentDate.getTime();
+		}
+		return (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+	}
+
+	public int getDaysRented() {
+		long diff;
+		if (getStatus() == Rental.STATUS.RENTED.getStatus()) {
 			diff = returnDate.getTime() - rentDate.getTime();
 		} else { // not yet returned
 			diff = new Date().getTime() - rentDate.getTime();
