@@ -1,8 +1,23 @@
 import java.util.Date;
 
 public class Rental {
+	public enum STATUS {
+		RENTED(0), RETURNED(1);
+
+		private final int status;
+		STATUS(int status){
+			this.status=status;
+		}
+		public int getStatus() {
+			return status;
+		}
+	}
+	
 	private Video video ;
 	private int status ; // 0 for Rented, 1 for Returned
+	public static final int STATUS_RENTED = 0 ;
+	public static final int STATUS_RETURNED = 1 ;
+
 	private Date rentDate ;
 	private Date returnDate ;
 
@@ -48,14 +63,8 @@ public class Rental {
 
 	public int getDaysRentedLimit() {
 		int limit = 0 ;
-		int daysRented ;
-		if (getStatus() == 1) { // returned Video
-			long diff = returnDate.getTime() - rentDate.getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
-		} else { // not yet returned
-			long diff = new Date().getTime() - rentDate.getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
-		}
+		int daysRented = Utils.getDaysRented(this);
+
 		if ( daysRented <= 2) return limit ;
 
 		switch ( video.getVideoType() ) {
