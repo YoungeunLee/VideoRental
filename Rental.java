@@ -29,10 +29,6 @@ public class Rental {
 		return video;
 	}
 
-	public void setVideo(Video video) {
-		this.video = video;
-	}
-
 	public int getStatus() {
 		return status;
 	}
@@ -47,16 +43,18 @@ public class Rental {
 		return rentDate;
 	}
 
-	public void setRentDate(Date rentDate) {
-		this.rentDate = rentDate;
-	}
-
 	public Date getReturnDate() {
 		return returnDate;
 	}
-
-	public void setReturnDate(Date returnDate) {
-		this.returnDate = returnDate;
+	
+	public int getDaysRented() {
+		long diff;
+		if (getStatus() == 1) { // returned Video
+			diff = returnDate.getTime() - rentDate.getTime();
+		} else { // not yet returned
+			diff = new Date().getTime() - rentDate.getTime();
+		}
+		return (int) (diff / (1000 * 60 * 60 * 24)) + 1;
 	}
 
 	public int getDaysRented() {
